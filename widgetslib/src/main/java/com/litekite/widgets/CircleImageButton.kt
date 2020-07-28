@@ -131,10 +131,17 @@ class CircleImageButton @JvmOverloads constructor(
 	}
 
 	override fun onDraw(canvas: Canvas?) {
+		if (canvas == null) {
+			return
+		}
 		// Drawing Background
-		canvas?.drawRoundRect(bgRectF, bgX, bgY, bgPaint)
+		if (bgDrawable != null) {
+			canvas.drawRoundRect(bgRectF, bgX, bgY, bgPaint)
+		}
 		// Drawing Source
-		canvas?.drawRoundRect(imgRectF, imgX, imgY, imgPaint)
+		if (drawable != null) {
+			canvas.drawRoundRect(imgRectF, imgX, imgY, imgPaint)
+		}
 	}
 
 }
