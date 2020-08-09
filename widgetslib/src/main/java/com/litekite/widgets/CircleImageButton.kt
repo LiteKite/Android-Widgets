@@ -19,6 +19,7 @@ package com.litekite.widgets
 import android.content.Context
 import android.graphics.*
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.RippleDrawable
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.core.graphics.drawable.toBitmap
@@ -69,17 +70,18 @@ class CircleImageButton @JvmOverloads constructor(
 	}
 
 	private fun updateSizes() {
+		// Background coordinates
 		bgX = width / 2f
 		bgY = height / 2f
-
+		// Background rect bounds
 		bgRectF.left = 0f
 		bgRectF.top = 0f
 		bgRectF.right = width.toFloat()
 		bgRectF.bottom = height.toFloat()
-
+		// Source coordinates
 		imgX = (width - innerPadding / 2f)
 		imgY = (height - innerPadding / 2f)
-
+		// Source rect bounds
 		imgRectF.left = innerPadding + 0f
 		imgRectF.top = innerPadding + 0f
 		imgRectF.right = width.toFloat() - innerPadding
@@ -87,7 +89,7 @@ class CircleImageButton @JvmOverloads constructor(
 	}
 
 	override fun setBackground(background: Drawable?) {
-		super.setBackground(null)
+		super.setBackground(if (background is RippleDrawable) background else null)
 		bgDrawable = background
 		postInvalidate()
 	}
