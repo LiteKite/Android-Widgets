@@ -1,2 +1,2 @@
 include ':widgetslib'
-rootProject.name = "Android-Widgets"
+rootProject.name = "Widgets"
