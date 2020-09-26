@@ -30,6 +30,10 @@ android {
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         consumerProguardFiles 'consumer-rules.pro'
     }
+    sourceSets {
+        main.java.srcDirs += "src/main/kotlin"
+        androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8

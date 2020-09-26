@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.litekite.widgets
+package com.litekite.widget
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
