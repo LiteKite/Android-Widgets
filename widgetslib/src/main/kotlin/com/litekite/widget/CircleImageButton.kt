@@ -43,6 +43,7 @@ class CircleImageButton @JvmOverloads constructor(
 		isAntiAlias = true
 	}
 	private var bgDrawable: Drawable? = null
+	private var rippleDrawable: Drawable? = null
 	private var bgBitmap: Bitmap? = null
 	private var imgX = 0f
 	private var imgY = 0f
@@ -58,7 +59,11 @@ class CircleImageButton @JvmOverloads constructor(
 			R.styleable.CircleImageButton_innerPadding,
 			0
 		)
+		rippleDrawable = typedArray.getDrawable(R.styleable.CircleImageButton_rippleDrawable)
+		// Recycles the TypedArray
 		typedArray.recycle()
+		// Sets ripple drawable as background
+		super.setBackground(rippleDrawable)
 	}
 
 	override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
@@ -89,9 +94,13 @@ class CircleImageButton @JvmOverloads constructor(
 	}
 
 	override fun setBackground(background: Drawable?) {
-		super.setBackground(if (background is RippleDrawable) background else null)
+		super.setBackground(if (rippleDrawable is RippleDrawable) rippleDrawable else null)
 		bgDrawable = background
 		postInvalidate()
+	}
+
+	override fun setForeground(foreground: Drawable?) {
+		super.setForeground(null)
 	}
 
 	override fun setImageDrawable(drawable: Drawable?) {
