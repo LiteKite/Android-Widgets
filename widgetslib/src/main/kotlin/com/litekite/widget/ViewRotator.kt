@@ -30,7 +30,6 @@ import android.view.ViewGroup
  * @version 1.0, 03/11/2020
  * @since 1.0
  */
-@Suppress("UNUSED")
 class ViewRotator @JvmOverloads constructor(
 	context: Context,
 	attrs: AttributeSet? = null,
