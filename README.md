@@ -182,7 +182,7 @@ allprojects {
 
 ~~~
 dependencies {
-  implementation 'com.github.LiteKite:Android-Widgets:0.0.5'
+  implementation 'com.github.LiteKite:Android-Widgets:0.0.6'
 }
 ~~~
 
