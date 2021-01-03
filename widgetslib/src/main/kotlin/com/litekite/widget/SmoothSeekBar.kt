@@ -36,6 +36,7 @@ class SmoothSeekBar @JvmOverloads constructor(
 ) : AppCompatSeekBar(context, attrs, defStyleAttr) {
 
 	private var callback: OnSeekBarChangeListener? = null
+	private var lastPointerId: Int = 0
 	private var lastProgress = 0
 
 	@SuppressLint("ClickableViewAccessibility")
@@ -47,9 +48,18 @@ class SmoothSeekBar @JvmOverloads constructor(
 			MotionEvent.ACTION_DOWN -> {
 				lastProgress = calculateProgress(event)
 				callback?.onStartTrackingTouch(this)
+				lastPointerId = event.getPointerId(event.actionIndex)
 			}
 			MotionEvent.ACTION_MOVE -> {
 				isPressed = true
+				// Updates last known progress based on the active pointer id
+				// in-case of any multi-touch event.
+				val currentPointerId = event.getPointerId(event.actionIndex)
+				if (lastPointerId != currentPointerId) {
+					lastProgress = calculateProgress(event)
+					lastPointerId = currentPointerId
+					return true
+				}
 				val newProgress = calculateProgress(event)
 				makeProgress(newProgress)
 				callback?.onProgressChanged(this, progress, true)
