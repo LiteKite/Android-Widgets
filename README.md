@@ -1,6 +1,6 @@
 # Android-Widgets
 
-[![](https://jitpack.io/v/LiteKite/Android-Widgets.svg)](https://jitpack.io/#LiteKite/Android-Widgets)
+[![GitHub release](https://img.shields.io/maven-central/v/com.github.litekite/android-widgets)](https://search.maven.org/search?q=g:com.github.litekite)
 
 An Android Custom Widgets Library, offers custom ui components.
 
@@ -167,13 +167,24 @@ CircleImageButton is a clickable image button that makes image source [app:srcCo
 
 ## Download
 
-1) Add the jitpack repo in your root build.gradle at the end of repositories:
+1) Add the maven central repo in your root build.gradle at the end of repositories:
 
 ~~~
+buildscript {
+    ...
+    repositories {
+        ...
+        mavenCentral()
+        ...
+    }
+    ...
+}
+...
 allprojects {
   repositories {
     ...
-    maven { url 'https://jitpack.io' }
+    mavenCentral()
+    ...
   }
 }
 ~~~
@@ -182,7 +193,7 @@ allprojects {
 
 ~~~
 dependencies {
-  implementation 'com.github.LiteKite:Android-Widgets:0.0.6'
+  implementation 'com.github.litekite:android-widgets:0.0.7'
 }
 ~~~
 
