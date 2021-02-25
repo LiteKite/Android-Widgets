@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 LiteKite Startup. All rights reserved.
+ * Copyright 2021 LiteKite Startup. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ import kotlin.math.roundToInt
  * @version 1.0, 06/11/2020
  * @since 1.0
  */
-class SmoothSeekBar @JvmOverloads constructor(
+public class SmoothSeekBar @JvmOverloads constructor(
 	context: Context,
 	attrs: AttributeSet? = null,
 	defStyleAttr: Int = 0

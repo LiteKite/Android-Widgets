@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 LiteKite Startup. All rights reserved.
+ * Copyright 2021 LiteKite Startup. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,9 +25,9 @@ import org.junit.Assert.*
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
-class ExampleUnitTest {
+public class ExampleUnitTest {
 	@Test
-	fun addition_isCorrect() {
+	public fun addition_isCorrect() {
 		assertEquals(4, 2 + 2)
 	}
 }

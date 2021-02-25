@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 LiteKite Startup. All rights reserved.
+ * Copyright 2021 LiteKite Startup. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,9 +30,9 @@ import org.junit.Assert.*
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 @RunWith(AndroidJUnit4::class)
-class ExampleInstrumentedTest {
+public class ExampleInstrumentedTest {
 	@Test
-	fun useAppContext() {
+	public fun useAppContext() {
 		// Context of the app under test.
 		val appContext = InstrumentationRegistry.getInstrumentation().targetContext
 		assertEquals("com.litekite.widgets", appContext.packageName)
