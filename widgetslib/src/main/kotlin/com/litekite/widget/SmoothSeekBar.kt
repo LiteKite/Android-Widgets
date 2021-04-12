@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.litekite.widget
 
 import android.annotation.SuppressLint
@@ -30,92 +29,91 @@ import kotlin.math.roundToInt
  * @since 1.0
  */
 public class SmoothSeekBar @JvmOverloads constructor(
-	context: Context,
-	attrs: AttributeSet? = null,
-	defStyleAttr: Int = 0
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
 ) : AppCompatSeekBar(context, attrs, defStyleAttr) {
 
-	private var callback: OnSeekBarChangeListener? = null
-	private var lastPointerId: Int = 0
-	private var lastProgress = 0
+    private var callback: OnSeekBarChangeListener? = null
+    private var lastPointerId: Int = 0
+    private var lastProgress = 0
 
-	@SuppressLint("ClickableViewAccessibility")
-	override fun onTouchEvent(event: MotionEvent): Boolean {
-		if (!isEnabled) {
-			return false
-		}
-		when (event.action) {
-			MotionEvent.ACTION_DOWN -> {
-				lastProgress = calculateProgress(event)
-				callback?.onStartTrackingTouch(this)
-				lastPointerId = event.getPointerId(event.actionIndex)
-			}
-			MotionEvent.ACTION_MOVE -> {
-				isPressed = true
-				// Updates last known progress based on the active pointer id
-				// in-case of any multi-touch event.
-				val currentPointerId = event.getPointerId(event.actionIndex)
-				if (lastPointerId != currentPointerId) {
-					lastProgress = calculateProgress(event)
-					lastPointerId = currentPointerId
-					return true
-				}
-				val newProgress = calculateProgress(event)
-				makeProgress(newProgress)
-				callback?.onProgressChanged(this, progress, true)
-				lastProgress = newProgress
-			}
-			MotionEvent.ACTION_UP -> {
-				isPressed = false
-				performClick()
-				callback?.onStopTrackingTouch(this)
-			}
-			MotionEvent.ACTION_CANCEL -> {
-				isPressed = false
-				callback?.onStopTrackingTouch(this)
-			}
-		}
-		return true
-	}
+    @SuppressLint("ClickableViewAccessibility")
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        if (!isEnabled) {
+            return false
+        }
+        when (event.action) {
+            MotionEvent.ACTION_DOWN -> {
+                lastProgress = calculateProgress(event)
+                callback?.onStartTrackingTouch(this)
+                lastPointerId = event.getPointerId(event.actionIndex)
+            }
+            MotionEvent.ACTION_MOVE -> {
+                isPressed = true
+                // Updates last known progress based on the active pointer id
+                // in-case of any multi-touch event.
+                val currentPointerId = event.getPointerId(event.actionIndex)
+                if (lastPointerId != currentPointerId) {
+                    lastProgress = calculateProgress(event)
+                    lastPointerId = currentPointerId
+                    return true
+                }
+                val newProgress = calculateProgress(event)
+                makeProgress(newProgress)
+                callback?.onProgressChanged(this, progress, true)
+                lastProgress = newProgress
+            }
+            MotionEvent.ACTION_UP -> {
+                isPressed = false
+                performClick()
+                callback?.onStopTrackingTouch(this)
+            }
+            MotionEvent.ACTION_CANCEL -> {
+                isPressed = false
+                callback?.onStopTrackingTouch(this)
+            }
+        }
+        return true
+    }
 
-	override fun setOnSeekBarChangeListener(l: OnSeekBarChangeListener?) {
-		callback = l
-	}
+    override fun setOnSeekBarChangeListener(l: OnSeekBarChangeListener?) {
+        callback = l
+    }
 
-	override fun getMin(): Int {
-		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-			return super.getMin()
-		}
-		return 0
-	}
+    override fun getMin(): Int {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            return super.getMin()
+        }
+        return 0
+    }
 
-	private fun makeProgress(newProgress: Int) {
-		val displacement = lastProgress - newProgress
-		val currentProgress = if (displacement < 0) {
-			// Progress increased
-			progress + abs(displacement)
-		} else {
-			// Progress reduced
-			progress - abs(displacement)
-		}
-		// Setting current progress
-		progress = when {
-			progress > max -> {
-				max
-			}
-			progress < min -> {
-				min
-			}
-			else -> {
-				currentProgress
-			}
-		}
-	}
+    private fun makeProgress(newProgress: Int) {
+        val displacement = lastProgress - newProgress
+        val currentProgress = if (displacement < 0) {
+            // Progress increased
+            progress + abs(displacement)
+        } else {
+            // Progress reduced
+            progress - abs(displacement)
+        }
+        // Setting current progress
+        progress = when {
+            progress > max -> {
+                max
+            }
+            progress < min -> {
+                min
+            }
+            else -> {
+                currentProgress
+            }
+        }
+    }
 
-	private fun calculateProgress(event: MotionEvent): Int {
-		val scale = event.x / width
-		val range = max - min
-		return (scale * range + min).roundToInt()
-	}
-
+    private fun calculateProgress(event: MotionEvent): Int {
+        val scale = event.x / width
+        val range = max - min
+        return (scale * range + min).roundToInt()
+    }
 }

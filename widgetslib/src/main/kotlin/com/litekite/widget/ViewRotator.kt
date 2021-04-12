@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.litekite.widget
 
 import android.content.Context
@@ -31,37 +30,36 @@ import android.view.ViewGroup
  * @since 1.0
  */
 public class ViewRotator @JvmOverloads constructor(
-	context: Context,
-	attrs: AttributeSet? = null,
-	defStyleAttr: Int = 0
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
 ) : ViewGroup(context, attrs, defStyleAttr) {
 
-	override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-		val childView = getChildAt(0)
-		if (childView != null && childView.visibility != GONE) {
-			// swap width and height for child
-			measureChild(childView, heightMeasureSpec, widthMeasureSpec)
-			setMeasuredDimension(childView.measuredHeightAndState, childView.measuredWidthAndState)
-		} else {
-			setMeasuredDimension(
-				resolveSizeAndState(0, widthMeasureSpec, 0),
-				resolveSizeAndState(0, heightMeasureSpec, 0)
-			)
-		}
-	}
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        val childView = getChildAt(0)
+        if (childView != null && childView.visibility != GONE) {
+            // swap width and height for child
+            measureChild(childView, heightMeasureSpec, widthMeasureSpec)
+            setMeasuredDimension(childView.measuredHeightAndState, childView.measuredWidthAndState)
+        } else {
+            setMeasuredDimension(
+                resolveSizeAndState(0, widthMeasureSpec, 0),
+                resolveSizeAndState(0, heightMeasureSpec, 0)
+            )
+        }
+    }
 
-	override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
-		val childView = getChildAt(0)
-		if (childView != null && childView.visibility != GONE) {
-			// rotate the child 90 degrees counterclockwise around its upper-left
-			childView.pivotX = 0f
-			childView.pivotY = 0f
-			childView.rotation = -90f
-			// place the child below this view, so it rotates into view
-			val width = r - l
-			val height = b - t
-			childView.layout(0, height, height, width + height)
-		}
-	}
-
+    override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
+        val childView = getChildAt(0)
+        if (childView != null && childView.visibility != GONE) {
+            // rotate the child 90 degrees counterclockwise around its upper-left
+            childView.pivotX = 0f
+            childView.pivotY = 0f
+            childView.rotation = -90f
+            // place the child below this view, so it rotates into view
+            val width = r - l
+            val height = b - t
+            childView.layout(0, height, height, width + height)
+        }
+    }
 }
