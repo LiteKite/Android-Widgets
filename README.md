@@ -1,6 +1,6 @@
 # Android-Widgets
 
-[![GitHub release](https://img.shields.io/maven-central/v/com.github.litekite/android-widgets)](https://search.maven.org/search?q=g:com.github.litekite)
+[![Maven Central](https://img.shields.io/maven-central/v/com.github.litekite/android-widgets.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.github.litekite%22%20AND%20a:%22android-widgets%22)
 
 An Android Custom Widgets Library, offers custom ui components.
 
